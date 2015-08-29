@@ -23,6 +23,18 @@ namespace ImitateSmartisanNote
         public MainWindow()
         {
             InitializeComponent();
+
+            var noteManager = new NoteManager();
+
+            noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
+            noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
+            noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
+            noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
+            noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
+            noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
+            noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
+
+            this.DataContext = noteManager;
         }
     }
 }

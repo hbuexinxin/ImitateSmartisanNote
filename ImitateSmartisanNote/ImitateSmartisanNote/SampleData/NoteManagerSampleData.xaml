@@ -1,0 +1,14 @@
+﻿<ImitateSmartisanNote:NoteManager xmlns:ImitateSmartisanNote="clr-namespace:ImitateSmartisanNote">
+	<ImitateSmartisanNote:NoteManager.Notes>
+		<ImitateSmartisanNote:NoteItemModel DateTip="Aenean nam vestibulum" NoteTitle="Curabitur aliquam"/>
+		<ImitateSmartisanNote:NoteItemModel DateTip="Adipiscing parturient integer mauris class" NoteTitle="Curae phasellus vestibulum sed cras"/>
+		<ImitateSmartisanNote:NoteItemModel DateTip="Nullam consequat dis maecenas" NoteTitle="Praesent vestibulum aptent convallis quisque"/>
+		<ImitateSmartisanNote:NoteItemModel DateTip="Duis auctor donec dignissim vivamus" NoteTitle="Etiam nunc congue elementum"/>
+		<ImitateSmartisanNote:NoteItemModel DateTip="Adipiscing amet est" NoteTitle="Parturient ante fusce"/>
+		<ImitateSmartisanNote:NoteItemModel DateTip="Hac facilisis fermentum" NoteTitle="Aliquam fringilla vestibulum accumsan arcu"/>
+		<ImitateSmartisanNote:NoteItemModel DateTip="Bibendum aliquet lorem diam vestibulum" NoteTitle="Habitasse adipiscing"/>
+		<ImitateSmartisanNote:NoteItemModel DateTip="Cursus parturient" NoteTitle="Morbi nulla dictumst"/>
+		<ImitateSmartisanNote:NoteItemModel DateTip="Leo eleifend eget mus nec" NoteTitle="Non hendrerit"/>
+		<ImitateSmartisanNote:NoteItemModel DateTip="Vestibulum vestibulum himenaeos per" NoteTitle="Blandit facilisi imperdiet commodo"/>
+	</ImitateSmartisanNote:NoteManager.Notes>
+</ImitateSmartisanNote:NoteManager>
