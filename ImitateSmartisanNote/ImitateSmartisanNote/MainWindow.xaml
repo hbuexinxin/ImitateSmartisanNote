@@ -11,18 +11,37 @@
         <DataTemplate x:Key="NoteItemDataTemplate">
             <DataTemplate.Resources>
                 <Storyboard x:Key="JiaZiMouseOver"/>
+                <Storyboard x:Key="ItemExpendStoryboard">
+                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="内容">
+                        <SplineThicknessKeyFrame KeyTime="0:0:0.5" Value="100,0,5,0" KeySpline="0.08,0.66,0.76,1"/>
+                    </ThicknessAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Key="ItemExpendBackStoryboard">
+                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="内容">
+                        <SplineThicknessKeyFrame KeyTime="0" Value="100,0,5,0"/>
+                        <SplineThicknessKeyFrame KeyTime="0:0:0.5" Value="10,0,5,0" KeySpline="0,0.48,0.58,1"/>
+                    </ThicknessAnimationUsingKeyFrames>
+                </Storyboard>
             </DataTemplate.Resources>
             <Grid Height="60" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="87*"/>
                 </Grid.ColumnDefinitions>
+                <StackPanel x:Name="ui_operationPanel" Grid.Column="1" HorizontalAlignment="Left" Margin="0" Width="Auto" Grid.ColumnSpan="2" Orientation="Horizontal">
+                    <Button x:Name="button" VerticalAlignment="Center" Height="Auto" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource ButtonStyle1}">
+                        <Grid Height="60" Width="133.302">
+                            <Image x:Name="note_item_delete_slider_9_png" Height="60" Source="note_item_delete_slider.9.png" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="删除" VerticalAlignment="Center" Margin="34,3,0,0"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
                 <Grid x:Name="内容" Grid.ColumnSpan="2" Margin="10,0,5,0">
                     <Grid.Effect>
                         <DropShadowEffect Color="#FFDAC6C6" Direction="252" BlurRadius="2" ShadowDepth="1"/>
                     </Grid.Effect>
                     <Path Grid.ColumnSpan="1" Data="M4.0000008,0 L16,0 20,0 20,3.9999998 20,56 20,60 16,60 4.0000008,60 C1.7908613,60 2.9802322E-07,58.209141 0,56 L0,3.9999998 C2.9802322E-07,1.790861 1.7908613,0 4.0000008,0 z" Fill="#FFF8F3EB" HorizontalAlignment="Left" Grid.RowSpan="1" StrokeStartLineCap="Round" Stretch="Fill" Stroke="{x:Null}" StrokeThickness="0" StrokeDashArray="1 0" Width="20"/>
-                    <Path Grid.ColumnSpan="1" Grid.Column="0" Data="M0,2.7114311E-11 L4.0000033,2.7114311E-11 461,2.7114311E-11 C461.27615,-1.0058009E-06 461.54575,0.027981101 461.80612,0.081263781 462.06653,0.13454847 462.31769,0.21313342 462.55698,0.31434283 462.79626,0.41554379 463.02362,0.53936976 463.23642,0.68313402 463.44925,0.82690209 463.64746,0.99060756 463.82843,1.171569 464.0094,1.3525352 464.1731,1.5507583 464.31686,1.7635584 464.46063,1.9763624 464.58444,2.2037418 464.68567,2.4430202 464.78687,2.682293 464.86545,2.9334667 464.91873,3.1938577 464.97202,3.4542499 465,3.7238567&#xD;&#xA;465,3.9999962 L465,56.000003 C465,56.276141 464.97202,56.545749 464.91873,56.80614 464.86545,57.066531 464.78687,57.317706 464.68567,57.556979 464.58444,57.796256 464.46063,58.023635 464.31686,58.236438 464.1731,58.449241 464.0094,58.647464 463.82843,58.828429 463.64746,59.009391 463.44925,59.173095 463.23642,59.316863 463.02362,59.460628 462.79626,59.584453 462.55698,59.685657 462.31769,59.786864 462.06653,59.865451 461.80612,59.918735 461.54575,59.972018 461.27615,59.999999&#xD;&#xA;461,59.999999 L4.0000033,59.999999 0,59.999999 0,56.000003 0,3.9999962 z" Fill="#FFFCFAF2" Margin="20,0,0,0" Stretch="Fill" Stroke="{x:Null}" StrokeThickness="0" />
+                    <Path Grid.ColumnSpan="1" Grid.Column="0" Data="M0,2.7114311E-11 L4.0000033,2.7114311E-11 461,2.7114311E-11 C461.27615,-1.0058009E-06 461.54575,0.027981101 461.80612,0.081263781 462.06653,0.13454847 462.31769,0.21313342 462.55698,0.31434283 462.79626,0.41554379 463.02362,0.53936976 463.23642,0.68313402 463.44925,0.82690209 463.64746,0.99060756 463.82843,1.171569 464.0094,1.3525352 464.1731,1.5507583 464.31686,1.7635584 464.46063,1.9763624 464.58444,2.2037418 464.68567,2.4430202 464.78687,2.682293 464.86545,2.9334667 464.91873,3.1938577 464.97202,3.4542499 465,3.7238567&#xA;465,3.9999962 L465,56.000003 C465,56.276141 464.97202,56.545749 464.91873,56.80614 464.86545,57.066531 464.78687,57.317706 464.68567,57.556979 464.58444,57.796256 464.46063,58.023635 464.31686,58.236438 464.1731,58.449241 464.0094,58.647464 463.82843,58.828429 463.64746,59.009391 463.44925,59.173095 463.23642,59.316863 463.02362,59.460628 462.79626,59.584453 462.55698,59.685657 462.31769,59.786864 462.06653,59.865451 461.80612,59.918735 461.54575,59.972018 461.27615,59.999999&#xA;461,59.999999 L4.0000033,59.999999 0,59.999999 0,56.000003 0,3.9999962 z" Fill="#FFFCFAF2" Margin="20,0,0,0" Stretch="Fill" Stroke="{x:Null}" StrokeThickness="0" />
                     <ed:LineArrow Grid.ColumnSpan="1" Fill="#FFFCFAF2" Margin="19,0,0,0" Stroke="#FFF1ECE3" StrokeThickness="1" EndArrow="NoArrow" BendAmount="0" Height="Auto" VerticalAlignment="Stretch" Width="1" HorizontalAlignment="Left" Grid.RowSpan="1"/>
                     <ed:LineArrow Grid.ColumnSpan="1" Fill="#FFFCFAF2" Margin="0,25,0,0" Stroke="#FFF1ECE3" StrokeThickness="1" EndArrow="NoArrow" BendAmount="0" Height="1" VerticalAlignment="Top"/>
                     <Grid Height="Auto" Width="Auto" Margin="21,0,0,0" Grid.Column="0">
@@ -36,6 +55,17 @@
                 </Grid>
                 <ToggleButton x:Name="toggleButton" VerticalAlignment="Stretch" d:LayoutOverrides="Width" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Style="{DynamicResource ToggleButtonStyle1}"/>
             </Grid>
+            <DataTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="True" SourceName="toggleButton">
+                    <Trigger.ExitActions>
+                        <RemoveStoryboard BeginStoryboardName="ItemExpendStoryboard_BeginStoryboard"/>
+                        <BeginStoryboard x:Name="ItemExpendBackStoryboard_BeginStoryboard" Storyboard="{StaticResource ItemExpendBackStoryboard}"/>
+                    </Trigger.ExitActions>
+                    <Trigger.EnterActions>
+                        <BeginStoryboard x:Name="ItemExpendStoryboard_BeginStoryboard" Storyboard="{StaticResource ItemExpendStoryboard}"/>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </DataTemplate.Triggers>
         </DataTemplate>
         <Style x:Key="ItemsControlStyle1" TargetType="{x:Type ItemsControl}">
             <Setter Property="Template">
@@ -393,6 +423,42 @@
                                 <Image x:Name="imageUp" Source="note_item_clip_up.png" Visibility="Hidden"/>
                             </Grid>
                         </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Padding="0">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <ContentPresenter.Effect>
+                                    <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FF615B5B" Opacity="0.5"/>
+                                </ContentPresenter.Effect>
+                            </ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true"/>
+                            <Trigger Property="IsMouseOver" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Effect" TargetName="contentPresenter">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FF645454" Opacity="0.5" Direction="120"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Padding" TargetName="border" Value="1,2,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
