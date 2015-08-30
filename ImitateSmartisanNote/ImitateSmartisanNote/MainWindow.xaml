@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ImitateSmartisanNote"
         xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Name="window" x:Class="ImitateSmartisanNote.MainWindow"
         mc:Ignorable="d"
-        Title="仿锤子便签(for PC)" Height="350" Width="525" Icon="notes_launcher.png" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="{x:Null}">
+        Title="仿锤子便签(for PC)" Height="350" Width="525" Icon="notes_launcher.png" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="{x:Null}" Margin="0">
     <Window.Resources>
         <DataTemplate x:Key="NoteItemDataTemplate">
             <DataTemplate.Resources>
@@ -467,19 +467,74 @@
             <Setter Property="FlowDirection" Value="LeftToRight"/>
             <Setter Property="Stretch" Value="UniformToFill"/>
         </Style>
+        <Style x:Key="ButtonStyle2" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="2">
+                            <Border.Background>
+                                <ImageBrush/>
+                            </Border.Background>
+                            <Grid Height="Auto">
+                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="0,2" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                    <ContentPresenter.Effect>
+                                        <DropShadowEffect Color="White" BlurRadius="0" ShadowDepth="0" Opacity="0"/>
+                                    </ContentPresenter.Effect>
+                                </ContentPresenter>
+                                <Image x:Name="ui_app_operationImage" Source="app_operation.png" Margin="0,-5" Stretch="Fill">
+                                    <Image.Effect>
+                                        <DropShadowEffect BlurRadius="0" ShadowDepth="0" Opacity="0"/>
+                                    </Image.Effect>
+                                </Image>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true"/>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Effect" TargetName="contentPresenter">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="0" ShadowDepth="0" Color="White"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Effect" TargetName="ui_app_operationImage">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="0" Color="White" Opacity="0" ShadowDepth="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Stretch" TargetName="ui_app_operationImage" Value="Fill"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Source" TargetName="ui_app_operationImage" Value="app_operation_press.png"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid d:DataContext="{d:DesignData /SampleData/NoteManagerSampleData.xaml}">
         <Grid.RowDefinitions>
             <RowDefinition Height="38"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Image x:Name="ui_imageTitle" Margin="0" VerticalAlignment="Top" Source="common_title_bar_bg.png" Height="38" Style="{DynamicResource ImageStyle2}"/>
-        <TextBlock x:Name="ui_titleTextBlock" HorizontalAlignment="Center" Text="{Binding Title, ElementName=window}" VerticalAlignment="Center" Foreground="#FFECDFDF" FontSize="16"/>
-        <ItemsControl ItemTemplate="{DynamicResource NoteItemDataTemplate}" ItemsSource="{Binding Notes}" Style="{DynamicResource ItemsControlStyle1}" Padding="0" Grid.Row="1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
-            <ItemsControl.Background>
-                <ImageBrush ImageSource="note_background.png" Stretch="UniformToFill" TileMode="Tile"/>
-            </ItemsControl.Background>
-        </ItemsControl>
+        <Grid x:Name="标题">
+            <Image x:Name="ui_imageTitle" Margin="0" VerticalAlignment="Top" Source="common_title_bar_bg.png" Height="38" Style="{DynamicResource ImageStyle2}"/>
+            <TextBlock x:Name="ui_titleTextBlock" HorizontalAlignment="Center" Text="{Binding Title, ElementName=window}" VerticalAlignment="Center" Foreground="#FFECDFDF" FontSize="16" Margin="262.5,8.84"/>
+            <Button x:Name="button" HorizontalAlignment="Right" Margin="0,0,8,0" Width="32" VerticalAlignment="Center" Style="{DynamicResource ButtonStyle2}" Height="24" BorderBrush="#CC000000">
+                <Image x:Name="image" Source="title_bar_list_new_icon.png"/>
+            </Button>
+        </Grid>
+        <Image x:Name="背景图片" Margin="0" Grid.Row="1" Source="note_background.png" Stretch="UniformToFill"/>
+        <ItemsControl ItemTemplate="{DynamicResource NoteItemDataTemplate}" ItemsSource="{Binding Notes}" Style="{DynamicResource ItemsControlStyle1}" Padding="0" Grid.Row="1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" BorderThickness="0,0,0,6"/>
 
     </Grid>
 </Window>

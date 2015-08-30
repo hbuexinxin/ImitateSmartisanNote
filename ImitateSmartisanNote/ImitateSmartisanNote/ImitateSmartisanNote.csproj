@@ -120,6 +120,15 @@
   <ItemGroup>
     <Resource Include="common_title_bar_bg.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app_operation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="title_bar_list_new_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app_operation_press.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
