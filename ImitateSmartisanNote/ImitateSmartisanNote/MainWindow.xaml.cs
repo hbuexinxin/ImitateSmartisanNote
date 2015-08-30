@@ -24,6 +24,7 @@ namespace ImitateSmartisanNote
         {
             InitializeComponent();
 
+            this.ui_imageTitle.MouseLeftButtonDown += Ui_imageTitle_MouseLeftButtonDown;
             var noteManager = new NoteManager();
 
             noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
@@ -35,6 +36,11 @@ namespace ImitateSmartisanNote
             noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
 
             this.DataContext = noteManager;
+        }
+
+        private void Ui_imageTitle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }

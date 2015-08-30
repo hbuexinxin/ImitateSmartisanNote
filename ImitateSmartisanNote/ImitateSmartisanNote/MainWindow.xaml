@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImitateSmartisanNote"
-        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="ImitateSmartisanNote.MainWindow"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Name="window" x:Class="ImitateSmartisanNote.MainWindow"
         mc:Ignorable="d"
-        Title="仿锤子便签(for PC)" Height="350" Width="525">
+        Title="仿锤子便签(for PC)" Height="350" Width="525" Icon="notes_launcher.png" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="{x:Null}">
     <Window.Resources>
         <DataTemplate x:Key="NoteItemDataTemplate">
             <DataTemplate.Resources>
@@ -463,12 +463,23 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ImageStyle2" TargetType="{x:Type Image}">
+            <Setter Property="FlowDirection" Value="LeftToRight"/>
+            <Setter Property="Stretch" Value="UniformToFill"/>
+        </Style>
     </Window.Resources>
-    <Window.Background>
-        <ImageBrush ImageSource="note_background.png" Stretch="UniformToFill"/>
-    </Window.Background>
     <Grid d:DataContext="{d:DesignData /SampleData/NoteManagerSampleData.xaml}">
-        <ItemsControl ItemTemplate="{DynamicResource NoteItemDataTemplate}" ItemsSource="{Binding Notes}" Style="{DynamicResource ItemsControlStyle1}" Padding="0"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="38"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Image x:Name="ui_imageTitle" Margin="0" VerticalAlignment="Top" Source="common_title_bar_bg.png" Height="38" Style="{DynamicResource ImageStyle2}"/>
+        <TextBlock x:Name="ui_titleTextBlock" HorizontalAlignment="Center" Text="{Binding Title, ElementName=window}" VerticalAlignment="Center" Foreground="#FFECDFDF" FontSize="16"/>
+        <ItemsControl ItemTemplate="{DynamicResource NoteItemDataTemplate}" ItemsSource="{Binding Notes}" Style="{DynamicResource ItemsControlStyle1}" Padding="0" Grid.Row="1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+            <ItemsControl.Background>
+                <ImageBrush ImageSource="note_background.png" Stretch="UniformToFill" TileMode="Tile"/>
+            </ItemsControl.Background>
+        </ItemsControl>
 
     </Grid>
 </Window>
