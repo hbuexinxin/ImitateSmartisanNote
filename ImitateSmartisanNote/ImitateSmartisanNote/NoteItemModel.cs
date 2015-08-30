@@ -15,6 +15,16 @@ namespace ImitateSmartisanNote
             this._noteTitle = noteTitle;
         }
 
+        public NoteItemModel(string _date, string _time, string _note)
+        {
+            this._date = _date;
+            this._time = _time;
+            this._note = _note;
+        }
+
+        private string _date;
+        private string _time;
+        private string _note;
 
         private string _dateTip;
         private string _noteTitle;
@@ -26,7 +36,7 @@ namespace ImitateSmartisanNote
                 return _dateTip;
             }
 
-            set
+            private set
             {
                 if (_dateTip != value)
                 {
@@ -43,7 +53,7 @@ namespace ImitateSmartisanNote
                 return _noteTitle;
             }
 
-            set
+            private set
             {
                 if (_noteTitle != value)
                 {
@@ -51,6 +61,83 @@ namespace ImitateSmartisanNote
                     _noteTitle = value;
                 }
             }
+        }
+
+        public string Date
+        {
+            get
+            {
+                return _date;
+            }
+
+            set
+            {
+                if (_date != value)
+                {
+                    _date = value;
+                    NotifyPropertyChanged("Date");
+
+                    UpdateDateTip();
+                }
+            }
+        }
+
+        public string Time
+        {
+            get
+            {
+                return _time;
+            }
+
+            set
+            {
+                if (_time != value)
+                {
+                    _time = value;
+                    NotifyPropertyChanged("Time");
+
+                    UpdateDateTip();
+                }
+            }
+        }
+
+        public string Note
+        {
+            get
+            {
+                return _note;
+            }
+
+            set
+            {
+                if (_note != value)
+                {
+                    _note = value;
+                    NotifyPropertyChanged("Note");
+
+                    UpdateNoteTitle();
+                }
+            }
+        }
+
+        private void UpdateDateTip()
+        {
+            this.DateTip = this.MakeDateTip();
+        }
+
+        private string MakeDateTip()
+        {
+            return string.Format("{0} {1}", this.Date , this.Time);
+        }
+
+        private void UpdateNoteTitle()
+        {
+            this.NoteTitle = MakeNoteTitle();
+        }
+
+        private string MakeNoteTitle()
+        {
+            return this.Note;
         }
 
         private void NotifyPropertyChanged(string strPropertyName)

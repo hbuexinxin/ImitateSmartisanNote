@@ -27,13 +27,11 @@ namespace ImitateSmartisanNote
             this.ui_imageTitle.MouseLeftButtonDown += Ui_imageTitle_MouseLeftButtonDown;
             var noteManager = new NoteManager();
 
-            noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
-            noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
-            noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
-            noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
-            noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
-            noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
-            noteManager.Notes.Add(new NoteItemModel("2015-1-2", "今天天气很好"));
+            NotesDataProvider dataProvider = new NotesDataProvider();
+            foreach(var item in dataProvider.LoadData())
+            {
+                noteManager.Notes.Add(item);
+            }
 
             this.DataContext = noteManager;
         }

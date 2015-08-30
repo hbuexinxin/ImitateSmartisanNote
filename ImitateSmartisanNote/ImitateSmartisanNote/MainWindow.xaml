@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ImitateSmartisanNote"
         xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Name="window" x:Class="ImitateSmartisanNote.MainWindow"
         mc:Ignorable="d"
-        Title="仿锤子便签(for PC)" Height="350" Width="525" Icon="notes_launcher.png" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="{x:Null}" Margin="0">
+        Title="便签" Height="634.5" Width="400" Icon="image\notes_launcher.png" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="{x:Null}" Margin="0">
     <Window.Resources>
         <DataTemplate x:Key="NoteItemDataTemplate">
             <DataTemplate.Resources>
@@ -31,7 +31,7 @@
                 <StackPanel x:Name="ui_operationPanel" Grid.Column="1" HorizontalAlignment="Left" Margin="0" Width="Auto" Grid.ColumnSpan="2" Orientation="Horizontal">
                     <Button x:Name="button" VerticalAlignment="Center" Height="Auto" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource ButtonStyle1}">
                         <Grid Height="60" Width="133.302">
-                            <Image x:Name="note_item_delete_slider_9_png" Height="60" Source="note_item_delete_slider.9.png" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Image x:Name="note_item_delete_slider_9_png" Height="60" Source="image\note_item_delete_slider.9.png" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                             <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="删除" VerticalAlignment="Center" Margin="34,3,0,0"/>
                         </Grid>
                     </Button>
@@ -49,8 +49,8 @@
                             <RowDefinition Height="25"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock x:Name="textBlock" TextWrapping="Wrap" d:LayoutOverrides="Width" Grid.RowSpan="1" FontSize="16" VerticalAlignment="Center" Margin="0,2.34,-0.001,2.34"><Run Text="TextBlock"/></TextBlock>
-                        <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="TextBlock" Margin="0,4.646,-0.001,6.646" d:LayoutOverrides="Width" Grid.Row="1" FontSize="18.667" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="日期提示" TextWrapping="Wrap" d:LayoutOverrides="Width" Grid.RowSpan="1" FontSize="16" VerticalAlignment="Center" Margin="0,2.34,-0.001,2.34" Text="{Binding DateTip}"></TextBlock>
+                        <TextBlock x:Name="标题" TextWrapping="Wrap" Text="{Binding NoteTitle}" Margin="0,4.646,-0.001,6.646" d:LayoutOverrides="Width" Grid.Row="1" FontSize="18.667" VerticalAlignment="Center"/>
                     </Grid>
                 </Grid>
                 <ToggleButton x:Name="toggleButton" VerticalAlignment="Stretch" d:LayoutOverrides="Width" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Style="{DynamicResource ToggleButtonStyle1}"/>
@@ -415,12 +415,12 @@
                             </VisualStateManager.VisualStateGroups>
                             <Grid HorizontalAlignment="Stretch" Height="Auto" Margin="0" Width="Auto">
                                 <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                <Image x:Name="imageNormal" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="note_item_clip_normal.png" Stretch="Uniform">
+                                <Image x:Name="imageNormal" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="image\note_item_clip_normal.png" Stretch="Uniform">
                                     <Image.Effect>
                                         <DropShadowEffect BlurRadius="0" ShadowDepth="0" Opacity="0"/>
                                     </Image.Effect>
                                 </Image>
-                                <Image x:Name="imageUp" Source="note_item_clip_up.png" Visibility="Hidden"/>
+                                <Image x:Name="imageUp" Source="image\note_item_clip_up.png" Visibility="Hidden"/>
                             </Grid>
                         </Border>
                     </ControlTemplate>
@@ -489,7 +489,7 @@
                                         <DropShadowEffect Color="White" BlurRadius="0" ShadowDepth="0" Opacity="0"/>
                                     </ContentPresenter.Effect>
                                 </ContentPresenter>
-                                <Image x:Name="ui_app_operationImage" Source="app_operation.png" Margin="0,-5" Stretch="Fill">
+                                <Image x:Name="ui_app_operationImage" Source="image\app_operation.png" Margin="0,-5" Stretch="Fill">
                                     <Image.Effect>
                                         <DropShadowEffect BlurRadius="0" ShadowDepth="0" Opacity="0"/>
                                     </Image.Effect>
@@ -512,7 +512,7 @@
                                 <Setter Property="Stretch" TargetName="ui_app_operationImage" Value="Fill"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Source" TargetName="ui_app_operationImage" Value="app_operation_press.png"/>
+                                <Setter Property="Source" TargetName="ui_app_operationImage" Value="image\app_operation_press.png"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false"/>
                         </ControlTemplate.Triggers>
@@ -527,13 +527,13 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid x:Name="标题">
-            <Image x:Name="ui_imageTitle" Margin="0" VerticalAlignment="Top" Source="common_title_bar_bg.png" Height="38" Style="{DynamicResource ImageStyle2}"/>
-            <TextBlock x:Name="ui_titleTextBlock" HorizontalAlignment="Center" Text="{Binding Title, ElementName=window}" VerticalAlignment="Center" Foreground="#FFECDFDF" FontSize="16" Margin="262.5,8.84"/>
+            <Image x:Name="ui_imageTitle" Margin="0" VerticalAlignment="Top" Source="image\common_title_bar_bg.png" Height="38" Style="{DynamicResource ImageStyle2}" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="ui_titleTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFECDFDF" FontSize="16" Margin="0" Text="{Binding Title, ElementName=window}"/>
             <Button x:Name="button" HorizontalAlignment="Right" Margin="0,0,8,0" Width="32" VerticalAlignment="Center" Style="{DynamicResource ButtonStyle2}" Height="24" BorderBrush="#CC000000">
-                <Image x:Name="image" Source="title_bar_list_new_icon.png"/>
+                <Image x:Name="image" Source="image\title_bar_list_new_icon.png"/>
             </Button>
         </Grid>
-        <Image x:Name="背景图片" Margin="0" Grid.Row="1" Source="note_background.png" Stretch="UniformToFill"/>
+        <Image x:Name="背景图片" Margin="0" Grid.Row="1" Source="image\note_background.png" Stretch="UniformToFill"/>
         <ItemsControl ItemTemplate="{DynamicResource NoteItemDataTemplate}" ItemsSource="{Binding Notes}" Style="{DynamicResource ItemsControlStyle1}" Padding="0" Grid.Row="1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" BorderThickness="0,0,0,6"/>
 
     </Grid>

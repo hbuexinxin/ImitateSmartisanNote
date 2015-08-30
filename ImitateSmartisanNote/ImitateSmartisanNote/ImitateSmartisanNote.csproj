@@ -38,6 +38,12 @@
     <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>..\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -76,6 +82,7 @@
   <ItemGroup>
     <Compile Include="NoteItemModel.cs" />
     <Compile Include="NoteManager.cs" />
+    <Compile Include="NotesDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -103,33 +110,36 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="note_item_clip_normal.png" />
+    <Resource Include="Image\note_item_clip_normal.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="note_background.png" />
+    <Resource Include="Image\note_background.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="note_item_clip_up.png" />
+    <Resource Include="Image\note_item_clip_up.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="note_item_delete_slider.9.png" />
+    <Resource Include="Image\note_item_delete_slider.9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="notes_launcher.png" />
+    <Resource Include="Image\notes_launcher.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="common_title_bar_bg.png" />
+    <Resource Include="Image\common_title_bar_bg.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="app_operation.png" />
+    <Resource Include="Image\app_operation.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="title_bar_list_new_icon.png" />
+    <Resource Include="Image\title_bar_list_new_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="app_operation_press.png" />
+    <Resource Include="Image\app_operation_press.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /e /h /Y "$(ProjectDir)..\SQLite\*"  "$(ProjectDir)$(OutDir)"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
