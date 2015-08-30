@@ -9,6 +9,9 @@
         Title="仿锤子便签(for PC)" Height="350" Width="525">
     <Window.Resources>
         <DataTemplate x:Key="NoteItemDataTemplate">
+            <DataTemplate.Resources>
+                <Storyboard x:Key="JiaZiMouseOver"/>
+            </DataTemplate.Resources>
             <Grid Height="60" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
@@ -31,7 +34,7 @@
                         <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="TextBlock" Margin="0,4.646,-0.001,6.646" d:LayoutOverrides="Width" Grid.Row="1" FontSize="18.667" VerticalAlignment="Center"/>
                     </Grid>
                 </Grid>
-                <Image x:Name="note_item_clip_normal_png" Grid.Column="0" HorizontalAlignment="Left" Margin="0,4,0,0" Source="note_item_clip_normal.png" Stretch="Uniform"/>
+                <ToggleButton x:Name="toggleButton" VerticalAlignment="Stretch" d:LayoutOverrides="Width" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Style="{DynamicResource ToggleButtonStyle1}"/>
             </Grid>
         </DataTemplate>
         <Style x:Key="ItemsControlStyle1" TargetType="{x:Type ItemsControl}">
@@ -317,6 +320,82 @@
                     </Setter>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+        <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
+            <Style.Resources>
+                <Storyboard x:Key="Storyboard1"/>
+            </Style.Resources>
+            <Setter Property="FlowDirection" Value="LeftToRight"/>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="ToggleButtonStyle1" TargetType="{x:Type ToggleButton}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)" Storyboard.TargetName="imageNormal">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="2"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.ShadowDepth)" Storyboard.TargetName="imageNormal">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="2"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Color)" Storyboard.TargetName="imageNormal">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FFDAD3D3"/>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed"/>
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="imageUp">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="imageNormal">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked"/>
+                                    <VisualState x:Name="Indeterminate"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid HorizontalAlignment="Stretch" Height="Auto" Margin="0" Width="Auto">
+                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                <Image x:Name="imageNormal" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="note_item_clip_normal.png" Stretch="Uniform">
+                                    <Image.Effect>
+                                        <DropShadowEffect BlurRadius="0" ShadowDepth="0" Opacity="0"/>
+                                    </Image.Effect>
+                                </Image>
+                                <Image x:Name="imageUp" Source="note_item_clip_up.png" Visibility="Hidden"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Window.Resources>
     <Window.Background>
