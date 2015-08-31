@@ -28,6 +28,8 @@ namespace ImitateSmartisanNote
             var noteManager = new NoteManager();
 
             NotesDataProvider dataProvider = new NotesDataProvider();
+            dataProvider.Init();
+
             foreach(var item in dataProvider.LoadData())
             {
                 noteManager.Notes.Add(item);

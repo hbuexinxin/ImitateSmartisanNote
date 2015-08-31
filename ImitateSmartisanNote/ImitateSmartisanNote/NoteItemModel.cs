@@ -9,17 +9,14 @@ namespace ImitateSmartisanNote
 {
     public class NoteItemModel : INotifyPropertyChanged
     {
-        public NoteItemModel(string dateTip, string noteTitle)
+        public NoteItemModel(string date, string time, string note)
         {
-            this._dateTip = dateTip;
-            this._noteTitle = noteTitle;
-        }
+            this._date = date;
+            this._time = time;
+            this._note = note;
 
-        public NoteItemModel(string _date, string _time, string _note)
-        {
-            this._date = _date;
-            this._time = _time;
-            this._note = _note;
+            this.UpdateDateTip();
+            this.UpdateNoteTitle();
         }
 
         private string _date;

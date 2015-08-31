@@ -1,0 +1,9 @@
+BEGIN TRANSACTION;
+CREATE TABLE "NotesTable" (
+	`ID`	INTEGER,
+	`Date`	TEXT,
+	`Time`	TEXT,
+	`Note`	TEXT,
+	PRIMARY KEY(ID)
+);
+COMMIT;
